@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 
 
-public class SkillSlot : EventTrigger
+public class SkillSlot : MonoBehaviour, IDropHandler
 {
     public SO_Skill SO_Skill;
 
@@ -18,7 +18,7 @@ public class SkillSlot : EventTrigger
         skillSlotTransform = GetComponent<Transform>();
     }
 
-    public override void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         DraggableObject enteringDraggableObject = eventData.pointerDrag.GetComponent<DraggableObject>();
         SkillSlot enteringDraggableObjectSkillslot = enteringDraggableObject.Origin.GetComponent<SkillSlot>();

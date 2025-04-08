@@ -1,14 +1,11 @@
-using NUnit.Framework;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 using System;
 
-public class ItemSlot : EventTrigger
+public class ItemSlot : MonoBehaviour, IDropHandler
 {
-    [SerializeField] public SO_Item so_Item;
+    [SerializeField]
+    public SO_Item so_Item;
 
     public Transform itemSlotTransform;
 
@@ -17,7 +14,7 @@ public class ItemSlot : EventTrigger
         itemSlotTransform = GetComponent<Transform>();
     }
 
-    public override void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         DraggableObject enteringDraggableObject = eventData.pointerDrag.GetComponent<DraggableObject>();
         ItemSlot enteringDraggableObjectSkillslot = enteringDraggableObject.Origin.GetComponent<ItemSlot>();
@@ -47,4 +44,5 @@ public class ItemSlot : EventTrigger
         enteringDraggableObject.SnapToTarget(existingDraggableObject.Origin);
         existingDraggableObject.SnapToTarget(tempOrigin);
     }
+
 }
