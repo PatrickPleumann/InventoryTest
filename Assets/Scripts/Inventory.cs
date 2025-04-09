@@ -7,7 +7,7 @@ using System.Linq;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] public List<ItemSlot> itemSlots { get; private set; }
-    [SerializeField] public GameObject itemSlotPrefab;
+    [SerializeField] public GameObject itemSlotPrefab; //slotItem
 
     private void Start()
     {
@@ -20,6 +20,10 @@ public class Inventory : MonoBehaviour
 
         foreach (var inventorySlot in itemSlots)
         {
+            if (inventorySlot.so_Item == false)
+            {
+                continue;
+            }
             CreateItemSlot(inventorySlot);
         }
     }

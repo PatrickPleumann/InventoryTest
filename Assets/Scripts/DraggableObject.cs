@@ -35,11 +35,13 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        
         slotImage.raycastTarget = true;
     }
 
     public void SnapToTarget(Transform _target)
     {
+        
         slotTransform.SetParent(_target);
         SlotRectTransform.anchoredPosition = Vector2.zero;
         Origin = _target;

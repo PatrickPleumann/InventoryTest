@@ -17,21 +17,39 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         DraggableObject enteringDraggableObject = eventData.pointerDrag.GetComponent<DraggableObject>();
-        ItemSlot enteringDraggableObjectSkillslot = enteringDraggableObject.Origin.GetComponent<ItemSlot>();
+        ItemSlot enteringDraggableObjectItemslot = enteringDraggableObject.Origin.GetComponent<ItemSlot>();
 
-        bool hasSkillInSlot = itemSlotTransform.childCount > 0;
+        bool hasItemInSlot = itemSlotTransform.childCount > 0;
 
-        SwapSlotItem(enteringDraggableObjectSkillslot);
+        SwapSlotItem(enteringDraggableObjectItemslot);
 
-        if (hasSkillInSlot == false)
+
+
+
+        if (hasItemInSlot == false)
         {
-            enteringDraggableObject.SnapToTarget(this.itemSlotTransform);
+            if (CompareTag("Itemslot") == false)
+            {
+                SnapBackToOrigin(enteringDraggableObject);
+            }
+            else
+            {
+                enteringDraggableObject.SnapToTarget(this.itemSlotTransform);
+            }
+
         }
 
-        if (hasSkillInSlot == true)
+        if (hasItemInSlot == true)
         {
-            DraggableObject existingDraggableObject = eventData.pointerEnter.GetComponent<DraggableObject>();
-            SwapObjects(enteringDraggableObject, existingDraggableObject);
+            if (!CompareTag("Itemslot") == false)
+            {
+                SnapBackToOrigin(enteringDraggableObject);
+            }
+            else
+            {
+                DraggableObject existingDraggableObject = eventData.pointerEnter.GetComponent<DraggableObject>();
+                SwapObjects(enteringDraggableObject, existingDraggableObject);
+            }
         }
     }
     private void SwapSlotItem(ItemSlot _slot)
@@ -43,6 +61,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         Transform tempOrigin = enteringDraggableObject.Origin;
         enteringDraggableObject.SnapToTarget(existingDraggableObject.Origin);
         existingDraggableObject.SnapToTarget(tempOrigin);
+    }
+    private void SnapBackToOrigin(DraggableObject enteringDraggableObject)
+    {
+        enteringDraggableObject.SnapToTarget(enteringDraggableObject.Origin);
     }
 
 }

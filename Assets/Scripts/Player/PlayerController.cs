@@ -44,7 +44,7 @@ namespace MovementSystem
         private void LateUpdate()
         {
             //UpdateCamera();
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void MapInputActions()
