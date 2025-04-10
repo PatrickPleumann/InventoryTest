@@ -10,6 +10,9 @@ namespace MovementSystem
         [Header("Movement")]
         [SerializeField] public PlayerMovement playerMovement;
 
+        [Header("Interaction")]
+        [SerializeField] public ClosestTargetProvider interactableProvider;
+
         [Header("Input")]
         [SerializeField] public PlayerInput playerInput;
 
@@ -18,8 +21,8 @@ namespace MovementSystem
         [SerializeField] public float lookSensitivity;
 
         private InputAction moveInputAction;
-        //private InputAction jumpInputAction;
         private InputAction lookInputAction;
+        private InputAction interactInputAction;
 
         //private float cameraRotationY;
 
@@ -39,32 +42,41 @@ namespace MovementSystem
             //Camera
             var rotation = GetRotation();
             playerMovement.RotationHorinzontal(rotation.x * lookSensitivity);
+
+            //Interaction
+            
         }
 
         private void LateUpdate()
         {
-            //UpdateCamera();
-            //Cursor.lockState = CursorLockMode.Locked;
+          
         }
 
         private void MapInputActions()
         {
-            //Movement
+            //Movement on WSAD
             moveInputAction = playerInput.actions["Move"];
 
-            //Jump
-            //jumpInputAction = playerInput.actions["Jump"];
-            //jumpInputAction.started += OnJumpInput;
 
-            //Camera
+            //Camera on MOUSE
             lookInputAction = playerInput.actions["Look"];
+
+            //Interaction on "E"
+            interactInputAction = playerInput.actions["Interact"];
+            interactInputAction.started += OnInteractionInput;
         }
 
-        //private void OnJumpInput(InputAction.CallbackContext context)
-        //{
+        
 
-        //}
-
+        private void OnInteractionInput(InputAction.CallbackContext context)
+        {
+            var closestInteractable = interactableProvider.GetTarget<Interactable>();
+            if (closestInteractable == false)
+            {
+                return;
+            }
+            closestInteractable.Interact();
+        }
 
         public Vector3 GetMoveDirection()
         {
@@ -76,6 +88,8 @@ namespace MovementSystem
             return lookInputAction.ReadValue<Vector2>();
         }
 
+        
+        
         //private void UpdateCamera()
         //{
         //    var rotation = GetRotation();
