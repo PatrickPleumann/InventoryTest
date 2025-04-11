@@ -13,6 +13,7 @@ public class SO_Item : ScriptableObject
         Stick,
     }
 
+    [SerializeField] public GameObject itemPrefab; // itemType
     [SerializeField] public ItemTypes itemType;
     [SerializeField] public int stackSize = 0;
     [SerializeField] public Sprite icon;

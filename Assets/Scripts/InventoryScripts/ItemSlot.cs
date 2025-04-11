@@ -13,7 +13,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         itemSlotTransform = GetComponent<Transform>();
     }
-
+    /// <summary>
+    /// Method is implemented by IDropHandler: Logic for swapping/snapping objects which are dragged inside the inventory.
+    /// </summary>
+    /// <param name="eventData">Event data from PointerEventData </param>
     public void OnDrop(PointerEventData eventData)
     {
         DraggableObject enteringDraggableObject = eventData.pointerDrag.GetComponent<DraggableObject>();
@@ -23,12 +26,9 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
         SwapSlotItem(enteringDraggableObjectItemslot);
 
-
-
-
         if (hasItemInSlot == false)
         {
-            if (CompareTag("Itemslot") == false)
+            if (gameObject.CompareTag("Itemslot") == false)
             {
                 SnapBackToOrigin(enteringDraggableObject);
             }
@@ -41,15 +41,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
         if (hasItemInSlot == true)
         {
-            if (!CompareTag("Itemslot") == false)
-            {
-                SnapBackToOrigin(enteringDraggableObject);
-            }
-            else
-            {
-                DraggableObject existingDraggableObject = eventData.pointerEnter.GetComponent<DraggableObject>();
-                SwapObjects(enteringDraggableObject, existingDraggableObject);
-            }
+            DraggableObject existingDraggableObject = eventData.pointerEnter.GetComponent<DraggableObject>();
+            SwapObjects(enteringDraggableObject, existingDraggableObject);
         }
     }
     private void SwapSlotItem(ItemSlot _slot)
@@ -66,5 +59,4 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         enteringDraggableObject.SnapToTarget(enteringDraggableObject.Origin);
     }
-
 }

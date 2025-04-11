@@ -24,6 +24,7 @@ public class Inventory : MonoBehaviour
             {
                 continue;
             }
+
             CreateItemSlot(inventorySlot);
         }
     }
@@ -31,7 +32,7 @@ public class Inventory : MonoBehaviour
     private void CreateItemSlot(ItemSlot _itemSlot)
     {
         var slotItem = Instantiate(itemSlotPrefab, _itemSlot.itemSlotTransform, false);
-
+        
         var image = slotItem.GetComponent<Image>();
         if (image == false)
         {

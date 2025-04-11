@@ -630,6 +630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot15
       objectReference: {fileID: 0}
+    - target: {fileID: 7722030742792866075, guid: fbbd2eea05a75b24d878e4c3ee9185b3, type: 3}
+      propertyPath: so_Item
+      value: 
+      objectReference: {fileID: 11400000, guid: 8358e658670736e43a6879a5765d122f, type: 2}
     - target: {fileID: 8648070263210274720, guid: fbbd2eea05a75b24d878e4c3ee9185b3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1854,7 +1858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &766380939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2164,7 +2168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1226763271
 RectTransform:
   m_ObjectHideFlags: 0
