@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot10
       objectReference: {fileID: 0}
+    - target: {fileID: 7722030742792866075, guid: fbbd2eea05a75b24d878e4c3ee9185b3, type: 3}
+      propertyPath: so_Item
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8648070263210274720, guid: fbbd2eea05a75b24d878e4c3ee9185b3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2221,6 +2225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlotPrefab: {fileID: 2735100935253599488, guid: 6003aad367ceb9d47b6306a51a61f9d8, type: 3}
+  itemsInInventory: []
 --- !u!1001 &1227551786
 PrefabInstance:
   m_ObjectHideFlags: 0

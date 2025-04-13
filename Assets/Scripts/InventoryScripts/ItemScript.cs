@@ -1,7 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class ItemScript : MonoBehaviour, IItem
+public class ItemScript : MonoBehaviour
 {
-    
+
 }
