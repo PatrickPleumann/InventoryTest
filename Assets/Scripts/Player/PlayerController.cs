@@ -1,17 +1,19 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace MovementSystem
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPointerClickHandler
     {
         [Header("Movement")]
         [SerializeField] public PlayerMovement playerMovement;
 
         [Header("Interaction")]
         [SerializeField] public ClosestTargetProvider interactableProvider;
+        [SerializeField] public Inventory inventory; // neu
 
         [Header("Input")]
         [SerializeField] public PlayerInput playerInput;
@@ -23,6 +25,8 @@ namespace MovementSystem
         private InputAction moveInputAction;
         private InputAction lookInputAction;
         private InputAction interactInputAction;
+        private InputAction openInventoryAction;
+        
 
         //private float cameraRotationY;
 
@@ -44,12 +48,12 @@ namespace MovementSystem
             playerMovement.RotationHorinzontal(rotation.x * lookSensitivity);
 
             //Interaction
-            
+
         }
 
         private void LateUpdate()
         {
-          
+
         }
 
         private void MapInputActions()
@@ -62,20 +66,33 @@ namespace MovementSystem
             lookInputAction = playerInput.actions["Look"];
 
             //Interaction on "E"
-            interactInputAction = playerInput.actions["Interact"];
-            interactInputAction.started += OnInteractionInput;
+            //interactInputAction = playerInput.actions["Interact"];
+            //interactInputAction. += OnPointerClick;
+
+            openInventoryAction = playerInput.actions["Inventory"];
+            openInventoryAction.started += OnInventoryOpenClose;
+
+
         }
 
-        
 
-        private void OnInteractionInput(InputAction.CallbackContext context)
+
+        private void OnInteractionInput(PointerEventData eventData)
         {
-            var closestInteractable = interactableProvider.GetTarget<Interactable>();
-            if (closestInteractable == false)
-            {
-                return;
-            }
-            closestInteractable.Interact();
+
+            
+            //var closestInteractable = interactableProvider.GetTarget<IAmInteractable>();
+            //if (closestInteractable == false)
+            //{
+            //    return;
+            //}
+            //closestInteractable.Interact();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            eventData.pointerClick.TryGetComponent<IAmInteractable>(out IAmInteractable context);
+            context.Interact(inventory.transform);
         }
 
         public Vector3 GetMoveDirection()
@@ -88,8 +105,16 @@ namespace MovementSystem
             return lookInputAction.ReadValue<Vector2>();
         }
 
+        private void OnInventoryOpenClose(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                inventory.EnableDisableInventory();
+            }
+        }
+
         
-        
+
         //private void UpdateCamera()
         //{
         //    var rotation = GetRotation();

@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class PlankScript : MonoBehaviour, IAmInteractable
+public class BerryScript : MonoBehaviour, ICanBePickedUp, IAmInteractable
+
 {
     [SerializeField] private SO_Item item;
-
+   
     public void Interact(Transform interactingObject)
     {
         if (interactingObject.gameObject.TryGetComponent(out IAmInventory container))
