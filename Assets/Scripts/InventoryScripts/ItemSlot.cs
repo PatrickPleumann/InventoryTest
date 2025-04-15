@@ -9,6 +9,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
     public Transform itemSlotTransform;
 
+    public bool hasSlotItem = false;
+
     private void Awake()
     {
         itemSlotTransform = GetComponent<Transform>();

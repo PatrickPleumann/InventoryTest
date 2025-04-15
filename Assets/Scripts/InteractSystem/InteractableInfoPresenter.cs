@@ -9,7 +9,7 @@ public class InteractableInfoPresenter : MonoBehaviour
     public ClosestTargetProvider targetProvider;
     public PlayerInput input;
 
-    private Interactable closestInteractable;
+    private IAmInteractable closestInteractable;
 
     private bool hasValidModel;
     private bool modelChanged;
@@ -34,27 +34,27 @@ public class InteractableInfoPresenter : MonoBehaviour
 
     private void UpdateModel()
     {
-        hasValidModel = false;
+        //hasValidModel = false;
 
-        closestInteractable = targetProvider.GetTarget<Interactable>();
-        if (closestInteractable == false)
-        {
-            return;
-        }
+        //closestInteractable = targetProvider.GetTarget<IAmInteractable>();
+        //if (closestInteractable == false)
+        //{
+        //    return;
+        //}
 
-        var newInteractableInfoProvider = closestInteractable.GetComponent<InteractableInfoProvider>();
-        if (model == false)
-        {
-            return;
-        }
+        //var newInteractableInfoProvider = closestInteractable.GetComponent<InteractableInfoProvider>();
+        //if (model == false)
+        //{
+        //    return;
+        //}
 
-        modelChanged = model != newInteractableInfoProvider;
-        if (modelChanged)
-        {
-            model = newInteractableInfoProvider;
-        }
+        //modelChanged = model != newInteractableInfoProvider;
+        //if (modelChanged)
+        //{
+        //    model = newInteractableInfoProvider;
+        //}
 
-        hasValidModel = true;
+        //hasValidModel = true;
     }
 
     private void ShowView()

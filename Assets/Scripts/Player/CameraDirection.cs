@@ -13,9 +13,9 @@ public class CameraDirection : MonoBehaviour
     {
         transform.position = new Vector3
             (
-            playerTransform.position.x, 
-            playerTransform.position.y + cameraPositionY,
-            playerTransform.position.z + cameraPositionZ
+            transform.position.x + cameraPositionX,
+            transform.position.y + cameraPositionY,
+            transform.position.z + cameraPositionZ
             );
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlankScript : MonoBehaviour, IAmInteractable
+public class OreScript : MonoBehaviour, IAmInteractable
 {
     [SerializeField] private SO_Item item;
 

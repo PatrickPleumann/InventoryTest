@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ItemScript : MonoBehaviour, IItem
+public class ItemScript : MonoBehaviour
 {
     
 }
