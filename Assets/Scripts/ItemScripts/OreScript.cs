@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OreScript : MonoBehaviour, IAmInteractable
+public class OreScript : MonoBehaviour, ICanBePickedUp, IAmInteractable
 {
     [SerializeField] private SO_Item item;
 

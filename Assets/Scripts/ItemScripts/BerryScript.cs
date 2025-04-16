@@ -8,7 +8,9 @@ public class BerryScript : MonoBehaviour, ICanBePickedUp, IAmInteractable
     public void Interact(Transform interactingObject)
     {
         if (interactingObject.gameObject.TryGetComponent(out IAmInventory container))
+        {
             PickUp(container);
+        }
     }
 
     public void PickUp(IAmInventory container)

@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 
 namespace MovementSystem
 {
-    public class PlayerController : MonoBehaviour, IPointerClickHandler
+    public class PlayerController : MonoBehaviour
     {
         [Header("Movement")]
         [SerializeField] public PlayerMovement playerMovement;
 
         [Header("Interaction")]
         [SerializeField] public ClosestTargetProvider interactableProvider;
-        [SerializeField] public Inventory inventory; // neu
+        [SerializeField] public Inventory inventory;
 
         [Header("Input")]
         [SerializeField] public PlayerInput playerInput;
@@ -26,9 +26,6 @@ namespace MovementSystem
         private InputAction lookInputAction;
         private InputAction interactInputAction;
         private InputAction openInventoryAction;
-        
-
-        //private float cameraRotationY;
 
         private void Awake()
         {
@@ -45,15 +42,8 @@ namespace MovementSystem
 
             //Camera
             var rotation = GetRotation();
+            //var rotation = GetMoveDirection();    //try getting Rotation over WSAD
             playerMovement.RotationHorinzontal(rotation.x * lookSensitivity);
-
-            //Interaction
-
-        }
-
-        private void LateUpdate()
-        {
-
         }
 
         private void MapInputActions()
@@ -65,34 +55,36 @@ namespace MovementSystem
             //Camera on MOUSE
             lookInputAction = playerInput.actions["Look"];
 
-            //Interaction on "E"
-            //interactInputAction = playerInput.actions["Interact"];
-            //interactInputAction. += OnPointerClick;
+            //Interaction on LeftMouseButton
+            interactInputAction = playerInput.actions["Interact"];
+            interactInputAction.started += OnInteractionInput;
 
+            //Open and Close Inventory on "I"
             openInventoryAction = playerInput.actions["Inventory"];
             openInventoryAction.started += OnInventoryOpenClose;
 
-
         }
 
-
-
-        private void OnInteractionInput(PointerEventData eventData)
+        private void GetMouseInteractor()
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            
-            //var closestInteractable = interactableProvider.GetTarget<IAmInteractable>();
-            //if (closestInteractable == false)
-            //{
-            //    return;
-            //}
-            //closestInteractable.Interact();
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if(hit.transform.TryGetComponent<ICanBePickedUp>(out ICanBePickedUp interactable))
+                {
+                    interactable.PickUp(inventory);
+                }
+            }
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        private void OnInteractionInput(InputAction.CallbackContext context)
         {
-            eventData.pointerClick.TryGetComponent<IAmInteractable>(out IAmInteractable context);
-            context.Interact(inventory.transform);
+            if (context.started)
+            {
+                GetMouseInteractor();
+            }
         }
 
         public Vector3 GetMoveDirection()

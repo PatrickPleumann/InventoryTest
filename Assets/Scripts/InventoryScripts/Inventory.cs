@@ -14,20 +14,12 @@ public class Inventory : MonoBehaviour, IAmInventory
 
     private void Awake()
     {
-        itemSlotsHasComponents = false;
-    }
-    private void OnEnable()
-    {
-        InitItemSlots();
+        itemSlots = GetComponentsInChildren<ItemSlot>().ToList();
+        gameObject.SetActive(false);
     }
 
     private void InitItemSlots()
     {
-        if (itemSlotsHasComponents == false)
-        {
-            itemSlots = GetComponentsInChildren<ItemSlot>().ToList();
-            itemSlotsHasComponents = true;
-        }
 
         foreach (var inventorySlot in itemSlots)
         {
@@ -79,6 +71,7 @@ public class Inventory : MonoBehaviour, IAmInventory
         if (gameObject.activeSelf == false)
         {
             gameObject.SetActive(true);
+            InitItemSlots();
         }
 
         else

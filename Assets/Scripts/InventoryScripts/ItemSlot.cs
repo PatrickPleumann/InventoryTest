@@ -31,7 +31,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
         if (hasItemInSlot == false)
         {
-            enteringDraggableObject.SnapToTarget(this.itemSlotTransform);
+            enteringDraggableObject.SnapToTarget(itemSlotTransform);
         }
 
         if (hasItemInSlot == true)
