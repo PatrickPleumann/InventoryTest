@@ -44,6 +44,7 @@ namespace MovementSystem
             var rotation = GetRotation();
             //var rotation = GetMoveDirection();    //try getting Rotation over WSAD
             playerMovement.RotationHorinzontal(rotation.x * lookSensitivity);
+            //playerMovement.RotationHorinzontal(rotation.x);
         }
 
         private void MapInputActions()
@@ -68,11 +69,10 @@ namespace MovementSystem
         private void GetMouseInteractor()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100))
             {
-                if(hit.transform.TryGetComponent<ICanBePickedUp>(out ICanBePickedUp interactable))
+                if(hit.transform.TryGetComponent(out ICanBePickedUp interactable))
                 {
                     interactable.PickUp(inventory);
                 }
@@ -86,6 +86,15 @@ namespace MovementSystem
                 GetMouseInteractor();
             }
         }
+        private void OnInventoryOpenClose(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                inventory.EnableDisableInventory();
+            }
+        }
+
+
 
         public Vector3 GetMoveDirection()
         {
@@ -96,16 +105,6 @@ namespace MovementSystem
         {
             return lookInputAction.ReadValue<Vector2>();
         }
-
-        private void OnInventoryOpenClose(InputAction.CallbackContext context)
-        {
-            if (context.started)
-            {
-                inventory.EnableDisableInventory();
-            }
-        }
-
-        
 
         //private void UpdateCamera()
         //{

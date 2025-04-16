@@ -33,11 +33,6 @@ namespace MovementSystem
             moveDirection = direction;
         }
 
-        //public void Jump()
-        //{
-
-        //}
-
         public void RotationHorinzontal(float rotation)
         {
             var currentRotation = rigidbody.rotation.eulerAngles;
