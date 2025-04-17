@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using System.Runtime.CompilerServices;
+using UnityEngineInternal;
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
+    // Issues:   OnDrop Method doenst get called if you don´t enter object with ItemSlot script.
+
     [SerializeField]
     public SO_Item so_Item;
 
@@ -46,8 +50,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     }
     private void SwapObjects(DraggableObject enteringDraggableObject, DraggableObject existingDraggableObject)
     {
-        Transform tempOrigin = enteringDraggableObject.Origin;
-        enteringDraggableObject.SnapToTarget(existingDraggableObject.Origin);
-        existingDraggableObject.SnapToTarget(tempOrigin);
+            Transform tempOrigin = enteringDraggableObject.Origin;
+            enteringDraggableObject.SnapToTarget(existingDraggableObject.Origin);
+            existingDraggableObject.SnapToTarget(tempOrigin);
     }
+
+    
 }

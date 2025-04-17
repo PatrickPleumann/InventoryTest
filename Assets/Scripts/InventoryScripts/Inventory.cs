@@ -9,15 +9,16 @@ public class Inventory : MonoBehaviour, IAmInventory
     [SerializeField] public List<ItemSlot> itemSlots { get; private set; }
     [SerializeField] public GameObject itemSlotPrefab; //slotItem
 
-    private bool itemSlotsHasComponents;
-    //private bool inventoryIsOpen;
-
     private void Awake()
     {
-        itemSlots = GetComponentsInChildren<ItemSlot>().ToList();
+        ComponentsInChildren();
         gameObject.SetActive(false);
     }
 
+    public void ComponentsInChildren()
+    {
+        itemSlots = GetComponentsInChildren<ItemSlot>().ToList();
+    }
     private void InitItemSlots()
     {
 

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfa22639133c7d4680606da0fbf336e, type: 3}
   m_Name: SO_Ore
   m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 6945823296611306269, guid: 30c682fc1323c6a469602c41a513c27d, type: 3}
   itemType: 2
   stackSize: 0
   icon: {fileID: 21300000, guid: 79a5d1e0e28d35f4f92aac75f9a8cdb8, type: 3}

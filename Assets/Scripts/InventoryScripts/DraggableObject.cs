@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +12,6 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public RectTransform SlotRectTransform { get; private set; }
 
     private Image slotImage;
-
     public Transform Origin { get; set; }
 
     private void Awake()
@@ -36,6 +36,10 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         slotImage.raycastTarget = true;
+        if (!eventData.pointerDrag.transform.parent.TryGetComponent<ItemSlot>(out _))
+        {
+            SnapToTarget(Origin);
+        }
     }
 
     public void SnapToTarget(Transform _target)
