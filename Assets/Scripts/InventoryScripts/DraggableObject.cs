@@ -33,10 +33,17 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         slotTransform.position = Mouse.current.position.ReadValue();
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData) //try to solve NullRef when var itemSlot can´t get any data over pointerDrag or pointerEnter.
     {
         slotImage.raycastTarget = true;
-        if (!eventData.pointerDrag.transform.parent.TryGetComponent<ItemSlot>(out _))
+
+        var itemSlot = eventData.pointerDrag.GetComponent<ItemSlot>();
+
+        if (itemSlot == true)
+        {
+            itemSlot.OnDrop(eventData);
+        }
+        else
         {
             SnapToTarget(Origin);
         }

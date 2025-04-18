@@ -4,9 +4,9 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngineInternal;
 
-public class ItemSlot : MonoBehaviour, IDropHandler
+public class ItemSlot : MonoBehaviour//, IDropHandler
 {
-    // Issues:   OnDrop Method doenst get called if you don´t enter object with ItemSlot script.
+    //OnDrop is called without IDropHandler, but var itemSlot in OnEndDrag is causing NullRef
 
     [SerializeField]
     public SO_Item so_Item;
@@ -19,6 +19,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         itemSlotTransform = GetComponent<Transform>();
     }
+
     /// <summary>
     /// Method is implemented by IDropHandler: Logic for swapping/snapping objects which are dragged inside the inventory.
     /// </summary>
@@ -44,6 +45,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             SwapObjects(enteringDraggableObject, existingDraggableObject);
         }
     }
+
     private void SwapSlotItem(ItemSlot _slot)
     {
         (so_Item, _slot.so_Item) = (_slot.so_Item, so_Item); // TUUUUPLE!!!!
@@ -54,6 +56,4 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             enteringDraggableObject.SnapToTarget(existingDraggableObject.Origin);
             existingDraggableObject.SnapToTarget(tempOrigin);
     }
-
-    
 }

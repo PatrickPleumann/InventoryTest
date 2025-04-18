@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class TrashSlot : MonoBehaviour, IDropHandler
 {
+    
+
     [SerializeField] private Transform playerTransform;
     public void OnDrop(PointerEventData eventData)
     {
