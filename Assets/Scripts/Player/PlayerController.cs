@@ -94,8 +94,6 @@ namespace MovementSystem
             }
         }
 
-
-
         public Vector3 GetMoveDirection()
         {
             var moveInput = moveInputAction.ReadValue<Vector2>();

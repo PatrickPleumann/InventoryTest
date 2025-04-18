@@ -37,13 +37,15 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         slotImage.raycastTarget = true;
 
-        var itemSlot = eventData.pointerDrag.GetComponent<ItemSlot>();
+        //var itemSlot = eventData.pointerEnter.GetComponent<ItemSlot>();
 
-        if (itemSlot == true)
-        {
-            itemSlot.OnDrop(eventData);
-        }
-        else
+        //if (itemSlot == true)
+        //{
+        //    itemSlot.OnDrop(eventData);
+        //    return;
+        //}
+        bool validSlot = eventData.pointerDrag.transform.parent.TryGetComponent<ItemSlot>(out _);
+        if (!validSlot)
         {
             SnapToTarget(Origin);
         }

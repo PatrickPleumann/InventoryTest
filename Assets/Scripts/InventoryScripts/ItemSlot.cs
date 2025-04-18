@@ -4,7 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngineInternal;
 
-public class ItemSlot : MonoBehaviour//, IDropHandler
+public class ItemSlot : MonoBehaviour, IDropHandler
 {
     //OnDrop is called without IDropHandler, but var itemSlot in OnEndDrag is causing NullRef
 
