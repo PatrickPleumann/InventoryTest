@@ -13,7 +13,6 @@ public class TrashSlot : MonoBehaviour, IDropHandler
         DraggableObject enteringObject = eventData.pointerDrag.GetComponent<DraggableObject>();
         ItemSlot enteringSlot = enteringObject.Origin.GetComponent<ItemSlot>();
 
-
         DropItemToGround(enteringSlot.so_Item);
         ClearDraggableObject(enteringObject);
         ClearSOItem(enteringSlot);
